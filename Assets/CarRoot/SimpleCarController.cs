@@ -16,20 +16,43 @@ public class SimpleCarController : MonoBehaviour {
     public Transform steeringWheel;
     public XRController RightController;
     public XRController LeftController;
+    public bool vrControl = false;
+    public Transform SeatTransform;
+    private Transform player;
+    private bool isSeating = false;
 
+    
     public void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+    }
+
+    public void Seat()
+    {
+        if (!isSeating)
+        {
+            player.SetParent(SeatTransform);
+            player.localPosition = Vector3.zero;
+            isSeating = true;
+        }
     }
 
     public void FixedUpdate()
     {
-        steeringAngle = steeringWheel.localRotation.eulerAngles.x;
-        if (steeringAngle > 90)
-            steeringAngle -= 360;
-        steeringAngle /= 90;
-        RightController.inputDevice.TryGetFeatureValue(CommonUsages.trigger, out rspeed);
-        LeftController.inputDevice.TryGetFeatureValue(CommonUsages.trigger, out lspeed);
-        speed = rspeed - lspeed;
+        if (vrControl)
+        {
+            steeringAngle = steeringWheel.localRotation.eulerAngles.x;
+            if (steeringAngle > 180)
+                steeringAngle -= 360;
+            steeringAngle /= 90;
+            RightController.inputDevice.TryGetFeatureValue(CommonUsages.trigger, out rspeed);
+            LeftController.inputDevice.TryGetFeatureValue(CommonUsages.trigger, out lspeed);
+            if (isSeating)
+                speed = rspeed - lspeed;
+            else
+                speed = 0f;
+        }
+
         float motor = maxMotorTorque * speed;
         float steering = maxSteeringAngle * steeringAngle;
             
