@@ -7,8 +7,8 @@ TerrainLayer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: ROCKY_WALKWAY
-  m_DiffuseTexture: {fileID: 2800000, guid: b371962450ff0f840bb4bbaa6f52187c, type: 3}
-  m_NormalMapTexture: {fileID: 2800000, guid: 1b45791b1fb11f248aff10d478e9acd9, type: 3}
+  m_DiffuseTexture: {fileID: 2800000, guid: 043745765459adc4fbe1075b5a6d8eba, type: 3}
+  m_NormalMapTexture: {fileID: 2800000, guid: c5110555356e5524fb5370bb7ff45e6c, type: 3}
   m_MaskMapTexture: {fileID: 0}
   m_TileSize: {x: 2, y: 2}
   m_TileOffset: {x: 0, y: 0}
