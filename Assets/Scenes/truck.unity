@@ -1397,8 +1397,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 676631323}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: -1.035, y: 0.64, z: 0.529}
-  m_LocalScale: {x: 0.023305193, y: 0.092367, z: 0.16921}
+  m_LocalPosition: {x: -1.045, y: 0.64, z: 0.529}
+  m_LocalScale: {x: 0.013857966, y: 0.092367, z: 0.16921}
   m_Children: []
   m_Father: {fileID: 2048234052}
   m_RootOrder: 7
@@ -1466,10 +1466,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1911023351}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 1911023357}
+        m_TargetAssemblyTypeName: TeleportSwitch, Assembly-CSharp
+        m_MethodName: Disable
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -3704,6 +3704,7 @@ GameObject:
   - component: {fileID: 1911023355}
   - component: {fileID: 1911023354}
   - component: {fileID: 1911023353}
+  - component: {fileID: 1911023357}
   m_Layer: 0
   m_Name: Right Teleport
   m_TagString: Untagged
@@ -4070,6 +4071,18 @@ MonoBehaviour:
   m_MoveObjectIn: 14
   m_MoveObjectOut: 15
   m_PoseProvider: {fileID: 0}
+--- !u!114 &1911023357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1911023351}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e433ea1449131304a95c66e7940fe5fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1950886314
 GameObject:
   m_ObjectHideFlags: 0
@@ -4117,6 +4130,7 @@ GameObject:
   - component: {fileID: 2011223615}
   - component: {fileID: 2011223614}
   - component: {fileID: 2011223613}
+  - component: {fileID: 2011223618}
   m_Layer: 0
   m_Name: Cube (2)
   m_TagString: Untagged
@@ -4219,6 +4233,91 @@ Transform:
   m_Father: {fileID: 572759821}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 126.15, z: 0}
+--- !u!114 &2011223618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2011223612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38f6bf3d943ac7945842268c9ef1dca6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_InteractionManager: {fileID: 183303167}
+  m_Colliders:
+  - {fileID: 2011223614}
+  m_InteractionLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_InteractionLayers:
+    m_Bits: 1
+  m_SelectMode: 1
+  m_CustomReticle: {fileID: 0}
+  m_FirstHoverEntered:
+    m_PersistentCalls:
+      m_Calls: []
+  m_LastHoverExited:
+    m_PersistentCalls:
+      m_Calls: []
+  m_HoverEntered:
+    m_PersistentCalls:
+      m_Calls: []
+  m_HoverExited:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FirstSelectEntered:
+    m_PersistentCalls:
+      m_Calls: []
+  m_LastSelectExited:
+    m_PersistentCalls:
+      m_Calls: []
+  m_SelectEntered:
+    m_PersistentCalls:
+      m_Calls: []
+  m_SelectExited:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Activated:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Deactivated:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnFirstHoverEntered:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnLastHoverExited:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnHoverEntered:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnHoverExited:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnSelectEntered:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnSelectExited:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnSelectCanceled:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnActivate:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnDeactivate:
+    m_PersistentCalls:
+      m_Calls: []
+  m_TeleportationProvider: {fileID: 0}
+  m_MatchOrientation: 0
+  m_TeleportTrigger: 0
+  m_Teleporting:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &2048234051
 GameObject:
   m_ObjectHideFlags: 0
@@ -4289,8 +4388,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.2874398, y: 0.5639206, z: 2.1892357}
-  m_Center: {x: -0.0015399456, y: 0.15210384, z: 0.0695467}
+  m_Size: {x: 2.2827578, y: 0.44392395, z: 5.2400985}
+  m_Center: {x: 0.0008010864, y: 0.21210217, z: 0.06314635}
 --- !u!114 &2048234055
 MonoBehaviour:
   m_ObjectHideFlags: 0

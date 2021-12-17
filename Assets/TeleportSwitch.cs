@@ -17,7 +17,7 @@ public class TeleportSwitch : MonoBehaviour
         _line = GetComponent<XRInteractorLineVisual>();
     }
 
-    void Enable()
+    public void Enable()
     {
         _interactor.enabled = true;
         _renderer.enabled = true;
@@ -25,7 +25,7 @@ public class TeleportSwitch : MonoBehaviour
         _line.enabled = true;
     }
 
-    void Disable()
+    public void Disable()
     {
         _interactor.enabled = false;
         _renderer.enabled = false;
