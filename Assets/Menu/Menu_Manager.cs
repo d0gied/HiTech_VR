@@ -9,8 +9,21 @@ public class Menu_Manager : MonoBehaviour
     public GameObject settings;
     public GameObject slider;
     public GameObject audio_sys;
+
+    public void Start()
+    {
+        if (!PlayerPrefs.HasKey("volume"))
+        {
+            audio_sys.GetComponent<AudioSource>().volume = 1f;
+        }
+        else
+        {
+            audio_sys.GetComponent<AudioSource>().volume = PlayerPrefs.GetFloat("volume");
+        }
+    }
     public void load_scene()
     {
+        PlayerPrefs.SetFloat("volume", audio_sys.GetComponent<AudioSource>().volume);
         SceneManager.LoadScene("terrain");
     }
     public void Value_Changed()
