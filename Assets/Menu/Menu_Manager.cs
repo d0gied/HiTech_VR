@@ -17,7 +17,7 @@ public class Menu_Manager : MonoBehaviour
     {
         if (!PlayerPrefs.HasKey("volume"))
         {
-            audio_sys.GetComponent<AudioSource>().volume = 1f;
+            audio_sys.GetComponent<AudioSource>().volume = 0.5f;
         }
         else
         {
@@ -32,7 +32,7 @@ public class Menu_Manager : MonoBehaviour
 
     IEnumerator LoadSceneAsync()
     {
-        AsyncOperation operation = SceneManager.LoadSceneAsync(2);
+        AsyncOperation operation = SceneManager.LoadSceneAsync(1);
         loading_screen.SetActive(true);
         gameObjects.SetActive(false);
         while (!operation.isDone)
@@ -42,7 +42,7 @@ public class Menu_Manager : MonoBehaviour
         }
     }
 
-    public void Value_Changed()
+    public void FixedUpdate()
     {
         audio_sys.GetComponent<AudioSource>().volume = (slider.transform.position.x + 0.52f) / 1.04f;
     }
