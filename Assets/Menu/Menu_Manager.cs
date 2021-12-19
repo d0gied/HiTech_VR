@@ -9,6 +9,9 @@ public class Menu_Manager : MonoBehaviour
     public GameObject settings;
     public GameObject slider;
     public GameObject audio_sys;
+    public GameObject loading_screen;
+    public Slider loadingBar;
+    public GameObject gameObjects;
 
     public void Start()
     {
@@ -24,8 +27,21 @@ public class Menu_Manager : MonoBehaviour
     public void load_scene()
     {
         PlayerPrefs.SetFloat("volume", audio_sys.GetComponent<AudioSource>().volume);
-        SceneManager.LoadScene("terrain");
+        StartCoroutine(LoadSceneAsync());
     }
+
+    IEnumerator LoadSceneAsync()
+    {
+        AsyncOperation operation = SceneManager.LoadSceneAsync(2);
+        loading_screen.SetActive(true);
+        gameObjects.SetActive(false);
+        while (!operation.isDone)
+        {
+            loadingBar.value = operation.progress;
+            yield return null;
+        }
+    }
+
     public void Value_Changed()
     {
         audio_sys.GetComponent<AudioSource>().volume = (slider.transform.position.x + 0.52f) / 1.04f;
