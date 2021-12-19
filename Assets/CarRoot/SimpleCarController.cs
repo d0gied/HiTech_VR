@@ -19,6 +19,7 @@ public class SimpleCarController : MonoBehaviour
     public XRController LeftController;
     public bool vrControl = false;
     public Transform SeatTransform;
+    public Transform StandTransform;
     private Transform player;
     private bool isSeating = false;
 
@@ -38,6 +39,17 @@ public class SimpleCarController : MonoBehaviour
         }
     }
 
+    public void GoOut()
+    {
+        if (isSeating)
+        {
+            player.SetParent(StandTransform);
+            player.localPosition = Vector3.zero;
+            player.parent = null;
+            isSeating = false;
+        }
+    }
+    
     public void FixedUpdate()
     {
         if (vrControl)
