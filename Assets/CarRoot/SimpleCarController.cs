@@ -22,11 +22,19 @@ public class SimpleCarController : MonoBehaviour
     public Transform StandTransform;
     private Transform player;
     private bool isSeating = false;
+    private AudioSource audio;
+    private float globalVolume = 0f;
+    public Transform volumeRot;
+    public AudioSource radio;
+    private float volumeRotationLevel = 0f;
+    private bool carBreak = true;
 
 
     public void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        audio = GetComponent<AudioSource>();
+        globalVolume = PlayerPrefs.GetFloat("volume");
     }
 
     public void Seat()
@@ -35,7 +43,11 @@ public class SimpleCarController : MonoBehaviour
         {
             player.SetParent(SeatTransform);
             player.localPosition = Vector3.zero;
+            player.localRotation = Quaternion.identity;
             isSeating = true;
+            carBreak = true;
+            if (radio)
+                radio.volume = volumeRotationLevel * globalVolume;
         }
     }
 
@@ -47,11 +59,35 @@ public class SimpleCarController : MonoBehaviour
             player.localPosition = Vector3.zero;
             player.parent = null;
             isSeating = false;
+            carBreak = false;
+            if (audio)
+                audio.volume = 0f;
+            if (radio)
+                radio.volume = 0f;
         }
     }
     
     public void FixedUpdate()
     {
+        if (volumeRot)
+        {
+
+            float volRot = volumeRot.localRotation.eulerAngles.y;
+            if (volRot >= 180)
+            {
+                volRot -= 360;
+            }
+
+            // Debug.Log(volRot);
+            volRot += 100;
+            volRot /= 200;
+            
+            volumeRotationLevel = volRot;
+
+            if (radio && isSeating)
+                radio.volume = volumeRotationLevel * globalVolume;
+        }
+
         if (vrControl)
         {
             steeringAngle = steeringWheel.localRotation.eulerAngles.x;
@@ -60,11 +96,17 @@ public class SimpleCarController : MonoBehaviour
             steeringAngle /= 90;
             RightController.inputDevice.TryGetFeatureValue(CommonUsages.trigger, out rspeed);
             LeftController.inputDevice.TryGetFeatureValue(CommonUsages.trigger, out lspeed);
+            bool btn = false;
+            if(isSeating)
+                LeftController.inputDevice.TryGetFeatureValue(CommonUsages.primaryButton, out btn);
+            carBreak = !btn;
             if (isSeating)
                 speed = rspeed - lspeed;
             else
                 speed = 0f;
         }
+        if(audio)
+            audio.volume = Mathf.Max(0.2f * globalVolume, speed * globalVolume);
 
         float motor = maxMotorTorque * speed;
         float steering = maxSteeringAngle * steeringAngle;
@@ -81,6 +123,17 @@ public class SimpleCarController : MonoBehaviour
             {
                 axleInfo.leftWheel.motorTorque = motor;
                 axleInfo.rightWheel.motorTorque = motor;
+            }
+
+            if (carBreak)
+            {
+                axleInfo.leftWheel.brakeTorque = 0f;
+                axleInfo.rightWheel.brakeTorque = 0f;
+            }
+            else
+            {
+                axleInfo.leftWheel.brakeTorque = 1f;
+                axleInfo.rightWheel.brakeTorque = 1f;
             }
 
             axleInfo.ApplyLocalPositionToVisuals();
